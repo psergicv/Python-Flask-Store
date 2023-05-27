@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="navbar-brand">
+        <a href="/">
+            <img src="path-to-your-logo" alt="Your Logo">
+        </a>
+    </div>
+
+    <div class="navbar-menu">
+        <ul class="navbar-list">
+            <li class="navbar-item"><a href="/category1">Category1</a></li>
+            <li class="navbar-item"><a href="/category2">Category2</a></li>
+            <li class="navbar-item"><a href="/category3">Category3</a></li>
+            <li class="navbar-item"><a href="/category4">Category4</a></li>
+            <li class="navbar-item"><a href="/category5">Category5</a></li>
+            <li class="navbar-item"><a href="/category6">Category6</a></li>
+            <li class="navbar-item"><a href="/category7">Category7</a></li>
+        </ul>
+    </div>
+
+    <div class="navbar-end">
+        <div class="navbar-item">
+            <a href="/cart">
+                <img src="path-to-your-cart-icon" alt="Cart">
+            </a>
+        </div>
+        <div class="navbar-item">
+            <a href="/account">
+                <img src="path-to-your-account-icon" alt="Account">
+            </a>
+        </div>
+    </div>
+</nav>
+
+{% block content %}{% endblock %}
+</body>
+</html>
