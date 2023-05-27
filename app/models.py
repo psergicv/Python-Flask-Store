@@ -1,9 +1,10 @@
 from app import db
 from datetime import datetime
+from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 
 
-class Customer(db.Model):
+class Customer(db.Model, UserMixin):
     id = db.Column(db.Integer(), unique=True, primary_key=True)
     username = db.Column(db.String(20), unique=True, nullable=False)
     password_hash = db.Column(db.String(128))
@@ -15,6 +16,7 @@ class Customer(db.Model):
     city = db.Column(db.String(100), nullable=False)
     street = db.Column(db.String(200), nullable=False)
     zip = db.Column(db.String(30), nullable=False)
+    phone = db.Column(db.String, nullable=False, unique=True)
 
     orders = db.relationship('Order', backref='customer', lazy='dynamic')
     cart = db.relationship('Cart', backref='customer', lazy='dynamic')
@@ -33,7 +35,7 @@ class Customer(db.Model):
         return check_password_hash(self.password_hash, password)
 
 
-class User(db.Model):
+class User(db.Model, UserMixin):
     id = db.Column(db.Integer, unique=True, primary_key=True)
     username = db.Column(db.String(25), unique=True, nullable=False)
     password_hash = db.Column(db.String(128))
@@ -87,6 +89,10 @@ class Order(db.Model):
 
     def save(self):
         db.session.add(self)
+        db.session.commit()
+
+    def delete(self):
+        db.session.delete(self)
         db.session.commit()
 
 
