@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, EmailField, PasswordField, DateField, SubmitField
+from wtforms import StringField, EmailField, PasswordField, DateField, SubmitField, SelectField
 from wtforms.validators import DataRequired, Email, Length, EqualTo
 
 
@@ -16,15 +16,24 @@ class CustomerRegisterForm(FlaskForm):
     street = StringField('Street', validators=[DataRequired()])
     zip = StringField('Zip Code', validators=[DataRequired])
     phone = StringField('Phone Number', validators=[DataRequired()])
+    submit = SubmitField('Save')
 
 
 class CustomerLoginForm(FlaskForm):
-    pass
+    username = StringField('Username', validators=[DataRequired(), Length(min=4, max=20)])
+    password = PasswordField('Password', validators=[DataRequired(), Length(min=8)])
+    submit = SubmitField('Login')
 
 
 class EmployeeAddForm(FlaskForm):
-    pass
+    firstname = StringField('First Name', validators=[DataRequired()])
+    lastname = StringField('Last Name', validators=[DataRequired()])
+    username = StringField('Username', validators=[DataRequired()])
+    password = PasswordField('Password', validators=[DataRequired()])
+    confirm_password = PasswordField('Confirm Password', validators=[DataRequired(), EqualTo('password')])
+    user_role = SelectField('Role', validators=[DataRequired()], choices=[('administrator', "Administrator"), ('moderator', "Moderator"), ('user', "User")])
 
 
 class EmployeeLoginForm(FlaskForm):
-    pass
+    username = StringField('Username', validators=[DataRequired(), Length(min=4, max=20)])
+    password = PasswordField('Password', validators=[DataRequired(), Length(min=0, max=100)])
