@@ -1,0 +1,50 @@
+{% extends 'user_side_html/user_layout.html' %}
+
+{% block title %} Register Page {% endblock %}
+
+
+{% block content %}
+<h1>Register Page</h1>
+<form method="POST">
+    {{ form.hidden_tag() }}
+    <div class="form-group">
+            {{ form.firstname.label }} {{ form.firstname(class="form-control") }}
+        </div>
+        <div class="form-group">
+            {{ form.lastname.label }} {{ form.lastname(class="form-control") }}
+        </div>
+        <div class="form-group">
+            {{ form.username.label }} {{ form.username(class="form-control") }}
+        </div>
+        <div class="form-group">
+            {{ form.password_hash.label }} {{ form.password_hash(class="form-control") }}
+        </div>
+        <div class="form-group">
+            {{ form.confirm_password.label }} {{ form.confirm_password(class="form-control") }}
+        </div>
+        <div class="form-group">
+            {{ form.email.label }} {{ form.email(class="form-control") }}
+        </div>
+        <div class="form-group">
+            {{ form.dob.label }} {{ form.dob(class="form-control") }}
+        </div>
+        <div class="form-group">
+            {{ form.country.label }} {{ form.country(class="form-control") }}
+        </div>
+        <div class="form-group">
+            {{ form.city.label }} {{ form.city(class="form-control") }}
+        </div>
+        <div class="form-group">
+            {{ form.street.label }} {{ form.street(class="form-control") }}
+        </div>
+        <div class="form-group">
+            {{ form.zip.label }} {{ form.zip(class="form-control") }}
+        </div>
+        <div class="form-group">
+            {{ form.phone.label }} {{ form.phone(class="form-control") }}
+        </div>
+        <div class="form-group">
+            {{ form.submit(class="btn btn-primary") }}
+        </div>
+</form>
+{% endblock %}

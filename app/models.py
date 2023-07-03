@@ -19,7 +19,7 @@ class Customer(db.Model, UserMixin):
     phone = db.Column(db.String, nullable=False, unique=True)
 
     orders = db.relationship('Order', backref='customer', lazy='dynamic')
-    cart = db.relationship('Cart', backref='customer', lazy='dynamic')
+    cart = db.relationship('Cart', backref='customer_cart', lazy='dynamic')
 
     def __repr__(self):
         return f"{self.id} - {self.username}"
@@ -81,7 +81,6 @@ class Order(db.Model):
     order_date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     status = db.Column(db.String(20), nullable=False, default='New')
 
-    customer = db.relationship('Customer', backref='orders')
     items = db.relationship('OrderItem', backref='order', lazy='dynamic')
 
     def __repr__(self):
@@ -119,8 +118,8 @@ class Cart(db.Model):
     product_id = db.Column(db.Integer, db.ForeignKey('product.id'), nullable=False)
     quantity = db.Column(db.Integer, nullable=False, default=1)
 
-    customer = db.relationship('Customer', backref='cart')
-    product = db.relationship('Product', backref='cart_items')
+    customer = db.relationship('Customer', backref='customer_cart')
+    product = db.relationship('Product', backref='customer_cart_items')
 
     def __repr__(self):
         return f"Cart {self.id}"
